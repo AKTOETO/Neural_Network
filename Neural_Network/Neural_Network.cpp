@@ -1,20 +1,103 @@
-﻿// Neural_Network.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <vector>
+#include <cstdlib>
 
-#include <iostream>
+#include "Constants.h"
+#include "Support.h"
+
+using namespace std;
+
+class Perceptron
+{
+protected:
+	vd weights;
+	double current_error = 1;
+
+public:
+	Perceptron()
+	{
+		weights.resize(2);
+		for (int i = 0; i < weights.size(); i++)
+		{
+			weights[i] = double(rand() % 1000) / 1000;
+		}
+	}
+
+	double guess(vd inputs)
+	{
+		double sum = 0;
+		for (int i = 0; i < weights.size(); i++)
+		{
+			sum += inputs[i] * weights[i];
+		}
+		double output = activator(sum);
+		return output;
+	}	
+
+	void train(vd inputs, double target)
+	{
+		double _guess = guess(inputs);
+		current_error = target - _guess;
+		//cout << "error: " << current_error << endl;
+
+		for (int i = 0; i < weights.size(); i++)
+		{
+			weights[i] += current_error * inputs[i] * learningRate;
+		}
+		/*cout << "weights: ";
+		out_vector(weights);*/
+	}
+
+	double get_error()
+	{
+		return current_error;
+	}
+
+	void print_weights()
+	{
+		cout << "weights: ";
+		out_vector(weights);
+	}
+
+};
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	srand(time(0));
+	/*
+	* A B A&B
+	* 0 0  0
+	* 0 1  0
+	* 1 0  0
+	* 1 1  1
+	*/
+	vvd inputs = {
+		{0, 0},
+		{0, 1},
+		{1, 0},
+		{1, 1}
+	};
+
+	vd target = {
+		0, 0, 0, 1
+	};
+
+	Perceptron p;
+	int number_of_train = 2, count_of_epoh = 0;
+
+	while (abs(p.get_error()) > 0.001)
+	{
+		p.train(inputs[number_of_train], target[number_of_train]);
+		count_of_epoh++;
+		/*double guess = p.guess(inputs[number_of_train]);
+		cout << "guess: " << guess << endl;
+		cout << "###########################\n";*/
+	}
+	cout << "epohs: " << count_of_epoh << endl;
+	p.print_weights();
+	cout << "error: " << abs(p.get_error()) * 100 << endl;
+	cout << "guess: " << p.guess(inputs[number_of_train]);
+
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
