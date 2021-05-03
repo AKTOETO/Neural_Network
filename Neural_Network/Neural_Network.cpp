@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <iomanip>
 
 #include "Constants.h"
 #include "Support.h"
@@ -96,8 +97,9 @@ int main()
 	}
 	cout << "epohs: " << count_of_epoh << endl;
 	p.print_weights();
-	cout << "error: " << abs(p.get_error()) * 100 << endl;
-	cout << "guess: " << p.guess(inputs[number_of_train]);
+	cout << "error: " << fixed << setprecision(2) << abs(p.get_error()) * 100 << "%\n";
+	cout << "guess: " << p.guess(inputs[number_of_train]) << "\n";
+	cout << "current target: " << fixed << setprecision(1) << target[number_of_train] << endl;
 
 	return 0;
 }
