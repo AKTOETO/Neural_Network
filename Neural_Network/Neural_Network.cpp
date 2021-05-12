@@ -62,44 +62,58 @@ public:
 
 };
 
+class NeuralNetwork
+{
+protected:
+	int num_input, num_hidden, num_output;
+public:
+	NeuralNetwork(int numI, int numH, int numO)
+	{
+		num_input = numI;
+		num_hidden = numH;
+		num_output = numO;
+
+	}
+};
 
 int main()
 {
 	srand(time(0));
-	/*
-	* A B A&B
-	* 0 0  0
-	* 0 1  0
-	* 1 0  0
-	* 1 1  1
-	*/
-	vvd inputs = {
-		{0, 0},
-		{0, 1},
-		{1, 0},
-		{1, 1}
-	};
+//	/*
+//	* A B A&B
+//	* 0 0  0
+//	* 0 1  0
+//	* 1 0  0
+//	* 1 1  1
+//	*/
+//	vvd inputs = {
+//		{0, 0},
+//		{0, 1},
+//		{1, 0},
+//		{1, 1}
+//	};
+//
+//	vd target = {
+//		0, 0, 0, 1
+//	};
+//
+//	Perceptron p;
+//	int number_of_train = 2, count_of_epoh = 0;
+//
+//	while (abs(p.get_error()) > 0.001)
+//	{
+//		p.train(inputs[number_of_train], target[number_of_train]);
+//		count_of_epoh++;
+//		/*double guess = p.guess(inputs[number_of_train]);
+//		cout << "guess: " << guess << endl;
+//		cout << "###########################\n";*/
+//	}
+//	cout << "epohs: " << count_of_epoh << endl;
+//	p.print_weights();
+//	cout << "error: " << fixed << setprecision(2) << abs(p.get_error()) * 100 << "%\n";
+//	cout << "guess: " << p.guess(inputs[number_of_train]) << "\n";
+//	cout << "current target: " << fixed << setprecision(1) << target[number_of_train] << endl;
 
-	vd target = {
-		0, 0, 0, 1
-	};
-
-	Perceptron p;
-	int number_of_train = 2, count_of_epoh = 0;
-
-	while (abs(p.get_error()) > 0.001)
-	{
-		p.train(inputs[number_of_train], target[number_of_train]);
-		count_of_epoh++;
-		/*double guess = p.guess(inputs[number_of_train]);
-		cout << "guess: " << guess << endl;
-		cout << "###########################\n";*/
-	}
-	cout << "epohs: " << count_of_epoh << endl;
-	p.print_weights();
-	cout << "error: " << fixed << setprecision(2) << abs(p.get_error()) * 100 << "%\n";
-	cout << "guess: " << p.guess(inputs[number_of_train]) << "\n";
-	cout << "current target: " << fixed << setprecision(1) << target[number_of_train] << endl;
 
 	return 0;
 }

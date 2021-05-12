@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+using namespace std;
 
 using vd = std::vector<double>;
 using vvd = std::vector<vd>;
