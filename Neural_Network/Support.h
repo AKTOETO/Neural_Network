@@ -56,6 +56,18 @@ public:
 		}
 		return mat;
 	}
+	
+	friend const Matrix operator*(Matrix& mat, Matrix& mat2)
+	{
+		for (int i = 0; i < mat.rows; i++)
+		{
+			for (int j = 0; j < mat.cols; j++)
+			{
+				mat.matrix[i][j] *= mat2.matrix[i][j];
+			}
+		}
+		return mat;
+	}
 
 	friend const Matrix operator+(Matrix& mat, const int num)
 	{
@@ -64,6 +76,18 @@ public:
 			for (int j = 0; j < mat.cols; j++)
 			{
 				mat.matrix[i][j] += num;
+			}
+		}
+		return mat;
+	}
+	
+	friend const Matrix operator+(Matrix& mat, Matrix& mat2)
+	{
+		for (int i = 0; i < mat.rows; i++)
+		{
+			for (int j = 0; j < mat.cols; j++)
+			{
+				mat.matrix[i][j] += mat2.matrix[i][j];
 			}
 		}
 		return mat;

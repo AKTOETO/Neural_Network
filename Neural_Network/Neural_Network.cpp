@@ -113,6 +113,11 @@ int main()
 //	cout << "error: " << fixed << setprecision(2) << abs(p.get_error()) * 100 << "%\n";
 //	cout << "guess: " << p.guess(inputs[number_of_train]) << "\n";
 //	cout << "current target: " << fixed << setprecision(1) << target[number_of_train] << endl;
+	Matrix m(3,2), f(3,2);
+	m = m + 5;
+	cout << m;
+	m = m + f;
+	cout << m << f;
 
 
 	return 0;
